@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url("https://i.pinimg.com/originals/81/45/0f/81450f353cdbe7934874fdd467e8af65.jpg");
+
+  /* Add the blur effect */
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.3); /* Black w/opacity/see-through */
+  color: black;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+canvas{
+  border-style: double;
+  height:100px;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-image"></div>
+
+<div class="bg-text">
+
+  <h1 style="font-size:50px">Jeans</h1>
+
+  <p>Upload Jeans images</p>
+  <p>
+   <div>
+      <input type="file" id="imageInput" accept = "image/*">
+      <canvas id= "myCanvas" width="100" height="100"></canvas>
+   </div>
+  </p>
+
+
+
+ <h1 style="font-size:50px">Jeans</h1>
+
+  <p>Upload Jeans images</p>
+  <p>
+   <div>
+      <input type="file" id="imageInput2" accept = "image/*">
+      <canvas id= "myCanvas2" width="100" height="100"></canvas>
+   </div>
+  </p>
+
+
+
+</div>
+
+</body>
+</html>
+
+
+<!-- Javascript -->
+<script>
+  let imgInput = document.getElementById('imageInput');
+  imgInput.addEventListener('change', function(e) {
+    if(e.target.files) {
+      let imageFile = e.target.files[0]; //here we get the image file
+      var reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+      reader.onloadend = function (e) {
+        var myImage = new Image(); // Creates image object
+        myImage.src = e.target.result; // Assigns converted image to image object
+        myImage.onload = function(ev) {
+          var myCanvas = document.getElementById("myCanvas"); // Creates a canvas object
+          var myContext = myCanvas.getContext("2d"); // Creates a contect object
+          myCanvas.width = myImage.width; // Assigns image's width to canvas
+          myCanvas.height = myImage.height; // Assigns image's height to canvas
+          myContext.drawImage(myImage,0,0); // Draws the image on canvas
+          let imgData = myCanvas.toDataURL("image/jpeg",0.75); // Assigns image base64 string in jpeg format to a variable
+        }
+      }
+    }
+  });
+  let imageInput2 = document.getElementById('imageInput2');
+  imageInput2.addEventListener('change', function(e) {
+    if(e.target.files) {
+      let imageFile2 = e.target.files[0]; //here we get the image file
+      var reader2 = new FileReader();
+      reader2.readAsDataURL(imageFile2);
+      reader2.onloadend = function (e) {
+        var myImage2 = new Image(); // Creates image object
+        myImage2.src = e.target.result; // Assigns converted image to image object
+        myImage2.onload = function(ev) {
+          var myCanvas2 = document.getElementById("myCanvas2"); // Creates a canvas object
+          var myContext2= myCanvas2.getContext("2d"); // Creates a contect object
+          myCanvas2.width = myImage2.width; // Assigns image's width to canvas
+          myCanvas2.height = myImage2.height; // Assigns image's height to canvas
+          myContext2.drawImage(myImage2,0,0); // Draws the image on canvas
+          let imgData2 = myCanvas2.toDataURL("image/jpeg",0.75); // Assigns image base64 string in jpeg format to a variable
+        }
+      }
+    }
+  });
+
+
+</script>
